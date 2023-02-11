@@ -1,6 +1,17 @@
 import PageComp from '@r/components/PageComp';
 import { ProList } from '@ant-design/pro-components';
-import { Button, Col, Form, message, Row, Select, Tag, Tooltip } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Row,
+  Select,
+  Space,
+  Tag,
+  Tooltip,
+} from 'antd';
 import MyTag from '@/renderer/components/MyTag';
 import ProjectApi from '@/service/projectApi';
 import { useEffect, useMemo, useState } from 'react';
@@ -19,6 +30,7 @@ const Project = () => {
   const [dataSource, setDataSource] = useState<ProjectType[]>([]);
   const [workCachePath, setWorkCachePath] = useState('');
   const [options, setOptions] = useState<OptionType[]>([]);
+  const [queryName, setQueryName] = useState('');
 
   const queryWorkSpace = async () => {
     const { data = [] } = await workSpaceApi.getList();
@@ -67,43 +79,52 @@ const Project = () => {
   };
 
   const list = useMemo(() => {
-    return dataSource.map((item) => ({
-      title: item?.zname,
-      subTitle: <MyTag type={item?.type} />,
-      actions: [
-        <a
-          key="run"
-          onClick={() => {
-            handleOpenVscode(item.path);
-          }}
-        >
-          vocde打开
-        </a>,
-        <a
-          key="delete"
-          onClick={() => {
-            handleOpenDir(item.path);
-          }}
-        >
-          打开文件夹
-        </a>,
-      ],
-      content: (
-        <Row gutter={[0, 6]}>
-          <Col span={24}>
-            <Tooltip title={item.name}>
-              <div className={styles.text}>工程：{item.name}</div>
-            </Tooltip>
-          </Col>
-          <Col span={24}>
-            <Tooltip title={item.path}>
-              <div className={styles.text}>路径：{item.path}</div>
-            </Tooltip>
-          </Col>
-        </Row>
-      ),
-    }));
-  }, [dataSource]);
+    return dataSource
+      .filter((item) => {
+        if (
+          item.name.includes(queryName) ||
+          item.zname?.includes(queryName) ||
+          queryName == ''
+        )
+          return item;
+      })
+      .map((item) => ({
+        title: item?.zname,
+        subTitle: <MyTag type={item?.type} />,
+        actions: [
+          <a
+            key="run"
+            onClick={() => {
+              handleOpenVscode(item.path);
+            }}
+          >
+            vocde打开
+          </a>,
+          <a
+            key="delete"
+            onClick={() => {
+              handleOpenDir(item.path);
+            }}
+          >
+            打开文件夹
+          </a>,
+        ],
+        content: (
+          <Row gutter={[0, 6]}>
+            <Col span={24}>
+              <Tooltip title={item.name}>
+                <div className={styles.text}>工程：{item.name}</div>
+              </Tooltip>
+            </Col>
+            <Col span={24}>
+              <Tooltip title={item.path}>
+                <div className={styles.text}>路径：{item.path}</div>
+              </Tooltip>
+            </Col>
+          </Row>
+        ),
+      }));
+  }, [queryName, dataSource]);
 
   useEffect(() => {
     if (workCachePath) {
@@ -117,22 +138,30 @@ const Project = () => {
 
   return (
     <PageComp>
-      <Select
-        placeholder="查询工作区"
-        options={options}
-        onChange={(value) => {
-          setWorkCachePath(value);
-        }}
-        allowClear
-        style={{ width: 160 }}
-      />
+      <Space>
+        <Select
+          placeholder="查询工作区"
+          options={options}
+          onChange={(value) => {
+            setWorkCachePath(value);
+          }}
+          allowClear
+          style={{ width: 160 }}
+        />
+        <Input
+          placeholder="输入中英文名称"
+          onChange={(e) => {
+            setQueryName(e.target.value);
+          }}
+        />
+      </Space>
       <ProList
         dataSource={list}
         showActions="hover"
         // rowSelection={{}}
         toolBarRender={() => [
           <Button key="refresh" type="primary" onClick={queryList}>
-            刷新
+            查询
           </Button>,
           <Button key="delAll" type="primary" onClick={delAll}>
             全部删除
