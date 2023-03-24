@@ -16,7 +16,11 @@ const writeProjectList = async (
   workSpacePath: string,
   workCachePath: string
 ) => {
+<<<<<<< HEAD
   // try {
+=======
+  const originList = await getProjectList(e, workCachePath);
+>>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   const dirs = await fs.promises.readdir(workSpacePath);
   const caches: ProjectType[] = [];
   for (const item of dirs) {
@@ -61,14 +65,26 @@ const writeProjectList = async (
         cacheObj.type = ProjectTypeEnum.dir;
         cacheObj.version = '^0.0.0';
       }
+<<<<<<< HEAD
+=======
+      originList?.forEach((item) => {
+        if (item.path == cacheObj.path) {
+          cacheObj.zname = item.zname;
+          cacheObj.type = item.type;
+        }
+      });
+>>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
       caches.push(cacheObj);
     }
   }
   await Cache.workSpaceCache(e, [workCachePath, caches]);
   return caches;
+<<<<<<< HEAD
   // } catch (error) {
   //   new Notification({ title: 'writeProjectList', body: error + '' });
   // }
+=======
+>>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 };
 
 const clearProjectList = async (e: any, workCachePath: string) => {
@@ -84,10 +100,44 @@ const openProjectVscode = async (e: any, projectPath: string) => {
   await execUtil(`code ${projectPath}`);
 };
 
+<<<<<<< HEAD
+=======
+const openProjectWebStorm = async (e: any, projectPath: string) => {
+  const execUtil = promisify(exec);
+  await execUtil(`webstorm64 ${projectPath}`);
+};
+
+const saveProject = async (
+  e: any,
+  project: ProjectType,
+  workCachePath: string
+) => {
+  const { path } = project;
+  const list = (await Cache.workSpaceCache(e, [
+    workCachePath,
+  ])) as ProjectType[];
+  const newList = list.map((item) => {
+    if (item.path == path) {
+      return {
+        ...project,
+        path,
+      };
+    }
+    return item;
+  });
+  await Cache.workSpaceCache(e, [workCachePath, newList]);
+};
+
+>>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 export default {
   getProjectList,
   writeProjectList,
   clearProjectList,
   openProjectDir,
   openProjectVscode,
+<<<<<<< HEAD
+=======
+  saveProject,
+  openProjectWebStorm,
+>>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 };
