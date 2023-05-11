@@ -19,10 +19,7 @@ import ProjectForm from './ProjectForm';
 import { ProjectType } from '@/Types/projectType';
 import styles from './style.module.less';
 import workSpaceApi from '@/service/workSpaceApi';
-<<<<<<< HEAD
-=======
 import EditForm from './EditForm';
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 
 type OptionType = {
   label: string;
@@ -31,18 +28,12 @@ type OptionType = {
 
 const Project = () => {
   const [visiable, setVisiable] = useState(false);
-<<<<<<< HEAD
-=======
   const [editVisiable, setEditVisiable] = useState(false);
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   const [dataSource, setDataSource] = useState<ProjectType[]>([]);
   const [workCachePath, setWorkCachePath] = useState('');
   const [options, setOptions] = useState<OptionType[]>([]);
   const [queryName, setQueryName] = useState('');
-<<<<<<< HEAD
-=======
   const [editObj, setEditObj] = useState<ProjectType>();
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 
   const queryWorkSpace = async () => {
     const { data = [] } = await workSpaceApi.getList();
@@ -90,8 +81,6 @@ const Project = () => {
     }
   };
 
-<<<<<<< HEAD
-=======
   const handleOpenWebStorm = async (path: string) => {
     try {
       await ProjectApi.openWebStorm(path);
@@ -104,8 +93,6 @@ const Project = () => {
     setEditVisiable(true);
     setEditObj(item);
   };
-
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   const list = useMemo(() => {
     return dataSource
       .filter((item) => {
@@ -126,9 +113,6 @@ const Project = () => {
               handleOpenVscode(item.path);
             }}
           >
-<<<<<<< HEAD
-            vocde打开
-=======
             vocde
           </a>,
           <a
@@ -138,7 +122,6 @@ const Project = () => {
             }}
           >
             webStorm64
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
           </a>,
           <a
             key="delete"
@@ -148,8 +131,7 @@ const Project = () => {
           >
             打开文件夹
           </a>,
-<<<<<<< HEAD
-=======
+
           <a
             key="delete"
             onClick={() => {
@@ -158,7 +140,6 @@ const Project = () => {
           >
             编辑配置
           </a>,
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
         ],
         content: (
           <Row gutter={[0, 6]}>
@@ -214,15 +195,12 @@ const Project = () => {
           <Button key="refresh" type="primary" onClick={queryList}>
             查询
           </Button>,
-<<<<<<< HEAD
           <Button key="delAll" type="primary" onClick={delAll}>
             全部删除
           </Button>,
-=======
           // <Button key="delAll" type="primary" onClick={delAll}>
           //   全部删除
           // </Button>,
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
           <Button key="create" type="primary" onClick={handleAdd}>
             读取工作区
           </Button>,
@@ -240,23 +218,15 @@ const Project = () => {
 
       {visiable && (
         <ProjectForm
-<<<<<<< HEAD
-          saveCallBack={(path: string) => {
-            queryList();
-            setVisiable(false);
-=======
           saveCallBack={() => {
             queryList();
             setVisiable(false);
             setEditVisiable(false);
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
           }}
           visiable={visiable}
           setVisiable={setVisiable}
         />
       )}
-<<<<<<< HEAD
-=======
 
       {editVisiable && (
         <EditForm
@@ -271,7 +241,6 @@ const Project = () => {
           workCachePath={workCachePath}
         />
       )}
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
     </PageComp>
   );
 };

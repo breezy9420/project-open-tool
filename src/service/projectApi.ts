@@ -7,11 +7,8 @@ enum ProjectApiEnum {
   openProjectDir = 'openProjectDir',
   clearProjectList = 'clearProjectList',
   openProjectVscode = 'openProjectVscode',
-<<<<<<< HEAD
-=======
   saveProject = 'saveProject',
   openProjectWebStorm = 'openProjectWebStorm',
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
 }
 
 class ProjectApi extends BaseApi {
@@ -25,10 +22,7 @@ class ProjectApi extends BaseApi {
     };
   }
 
-<<<<<<< HEAD
-=======
   // 工作区读取
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   async save(workSpacePath: string, workCachePath: string) {
     await this.ipcRenderer.invoke(
       ProjectApiEnum.writeProjectList,
@@ -37,8 +31,6 @@ class ProjectApi extends BaseApi {
     );
   }
 
-<<<<<<< HEAD
-=======
   // 项目编辑baocun
   async saveProject(project: ProjectType, workCachePath: string) {
     await this.ipcRenderer.invoke(
@@ -48,7 +40,6 @@ class ProjectApi extends BaseApi {
     );
   }
 
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   async clear(workCachePath: string) {
     await this.ipcRenderer.invoke(
       ProjectApiEnum.clearProjectList,
@@ -60,13 +51,10 @@ class ProjectApi extends BaseApi {
     await this.ipcRenderer.invoke(ProjectApiEnum.openProjectVscode, path);
   }
 
-<<<<<<< HEAD
-=======
   async openWebStorm(path: string) {
     await this.ipcRenderer.invoke(ProjectApiEnum.openProjectWebStorm, path);
   }
 
->>>>>>> 9d1ba90... 添加webstorm64打开、编辑项目功能
   async openDir(path: string) {
     await this.ipcRenderer.invoke(ProjectApiEnum.openProjectDir, path);
   }
