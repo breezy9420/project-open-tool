@@ -7,8 +7,6 @@
 yarn 
 ```
 
-**注：electron需要科学上网**
-
 ## 运行
 ```
 yarn start
