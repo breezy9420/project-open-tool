@@ -78,7 +78,7 @@ const WorkSpace = () => {
   ];
 
   return (
-    <PageComp title="工作区管理">
+    <PageComp>
       <ProTable<WorkSpace>
         actionRef={actionRef}
         request={workSpaceApi.getList.bind(workSpaceApi)}

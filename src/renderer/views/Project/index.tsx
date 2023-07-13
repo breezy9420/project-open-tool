@@ -113,7 +113,7 @@ const Project = () => {
               handleOpenVscode(item.path);
             }}
           >
-            vocde
+            vscode
           </a>,
           <a
             key="delete"

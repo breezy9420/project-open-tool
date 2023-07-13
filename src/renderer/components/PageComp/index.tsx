@@ -42,14 +42,14 @@ const PageComp = (props: Props) => {
         >
           工作区管理
         </Button>
-        <Button
+        {/* <Button
           onClick={() => {
             message.warning('待开发中');
           }}
           type="primary"
         >
           上网工具
-        </Button>
+        </Button> */}
       </DrawerComp>
       {title && <h2 className={styles.title}>{title}</h2>}
       <div className={styles.content}>{children}</div>
