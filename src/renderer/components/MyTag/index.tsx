@@ -14,8 +14,10 @@ const MyTag = (props: Props) => {
       case ProjectTypeEnum.vue:
         return '#87d068';
       case ProjectTypeEnum.react:
+        case ProjectTypeEnum.go:
         return '#2db7f5';
       case ProjectTypeEnum.dir:
+        case ProjectTypeEnum.javascript:
         return 'orange';
       default:
         return 'orange';

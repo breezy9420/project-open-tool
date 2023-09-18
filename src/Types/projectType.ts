@@ -2,6 +2,8 @@ export enum ProjectTypeEnum {
   vue = 'vue',
   react = 'react',
   dir = 'dir',
+  javascript = "javascript",
+  go = "go"
 }
 
 export interface ProjectType {

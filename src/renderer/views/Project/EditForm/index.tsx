@@ -21,6 +21,8 @@ const layout = {
 const options = [
   { label: 'vue', value: 'vue' },
   { label: 'react', value: 'react' },
+  { label: 'go', value: 'go' },
+  { label: 'javascript', value: 'javascript' },
   { label: 'dir', value: 'dir' },
 ];
 
