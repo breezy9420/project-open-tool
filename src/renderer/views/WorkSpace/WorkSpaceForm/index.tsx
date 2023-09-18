@@ -65,7 +65,7 @@ const WorkSpaceForm = (props: Props) => {
             </Col>
             <Col span={4}>
               <Button type="primary" onClick={readPath}>
-                读取路径
+                校验路径
               </Button>
             </Col>
           </Row>

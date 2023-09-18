@@ -4,16 +4,16 @@
 
 ## 安装
 ```
-yarn 
+npm install
 ```
 
 ## 运行
 ```
-yarn start
+npm run start
 ```
 
 ## 打包
 ```
-yarn package
+npm run package
 ```
 
