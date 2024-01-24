@@ -11,6 +11,7 @@ const Home = () => {
       </h5>
       <h5>作者：Breezy</h5>
       <h5>邮箱：manbreezy1937@gmail.com</h5>
+      <h5>开源地址：https://github.com/gHuang1122/project-open-tool</h5>
     </PageComp>
   );
 };

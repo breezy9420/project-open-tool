@@ -2,15 +2,15 @@ import PageComp from '@r/components/PageComp';
 import { ProList } from '@ant-design/pro-components';
 import {
   Button,
-  Col,
+  Col, Dropdown,
   Form,
-  Input,
+  Input, MenuProps,
   message,
   Row,
   Select,
   Space,
   Tag,
-  Tooltip,
+  Tooltip
 } from 'antd';
 import MyTag from '@/renderer/components/MyTag';
 import ProjectApi from '@/service/projectApi';
@@ -26,6 +26,7 @@ type OptionType = {
   value: string;
 };
 
+
 const Project = () => {
   const [visiable, setVisiable] = useState(false);
   const [editVisiable, setEditVisiable] = useState(false);
@@ -39,7 +40,7 @@ const Project = () => {
     const { data = [] } = await workSpaceApi.getList();
     const arr = data.map((item) => ({
       label: item.name,
-      value: item.workCachePath,
+      value: item.workCachePath
     }));
     setOptions(arr);
   };
@@ -93,6 +94,44 @@ const Project = () => {
     setEditVisiable(true);
     setEditObj(item);
   };
+
+  const items: MenuProps['items'] = [
+    {
+      label: 'vscode',
+      key: 'code'
+    },
+    {
+      label: 'webstorm64',
+      key: 'webstorm64'
+    },
+    {
+      label: 'pycharm64',
+      key: 'pycharm64'
+    },
+    {
+      label: 'goland64',
+      key: 'goland64'
+    },
+    {
+      label: 'IDEA64',
+      key: 'idea64'
+    }
+  ];
+
+
+  const open = async (e: any, path: string) => {
+    const { key } = e;
+    message.info(`${key}_${path}`);
+    try {
+      await ProjectApi.openSoft({
+        type: key,
+        path
+      });
+    } catch (error) {
+      message.error(error + '');
+    }
+  };
+
   const list = useMemo(() => {
     return dataSource
       .filter((item) => {
@@ -107,22 +146,6 @@ const Project = () => {
         title: item?.zname,
         subTitle: <MyTag type={item?.type} />,
         actions: [
-          <a
-            key="run"
-            onClick={() => {
-              handleOpenVscode(item.path);
-            }}
-          >
-            vscode
-          </a>,
-          <a
-            key="delete"
-            onClick={() => {
-              handleOpenWebStorm(item.path);
-            }}
-          >
-            webStorm64
-          </a>,
           <a
             key="delete"
             onClick={() => {
@@ -140,6 +163,14 @@ const Project = () => {
           >
             编辑配置
           </a>,
+          <div style={{ width: 120 }}>
+            <Dropdown menu={{ items, onClick: (e) => open(e, item.path) }}>
+              <a onClick={e => e.preventDefault()}>
+                打开方式
+              </a>
+            </Dropdown>
+          </div>
+
         ],
         content: (
           <Row gutter={[0, 6]}>
@@ -154,7 +185,7 @@ const Project = () => {
               </Tooltip>
             </Col>
           </Row>
-        ),
+        )
       }));
   }, [queryName, dataSource]);
 
@@ -198,12 +229,9 @@ const Project = () => {
           <Button key="delAll" type="primary" onClick={delAll}>
             全部删除
           </Button>,
-          // <Button key="delAll" type="primary" onClick={delAll}>
-          //   全部删除
-          // </Button>,
           <Button key="create" type="primary" onClick={handleAdd}>
             读取工作区
-          </Button>,
+          </Button>
         ]}
         grid={{ gutter: 16, column: 3 }}
         metas={{
@@ -211,8 +239,8 @@ const Project = () => {
           subTitle: {},
           content: {},
           actions: {
-            cardActionProps: 'actions',
-          },
+            cardActionProps: 'actions'
+          }
         }}
       ></ProList>
 

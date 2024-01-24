@@ -27,7 +27,7 @@ const writeProjectList = async (
       const cacheObj: ProjectType = {
         path: dirPath,
         name: item,
-        zname: item,
+        zname: item
       };
       try {
         if (dirContent.includes('package.json')) {
@@ -87,6 +87,12 @@ const openProjectVscode = async (e: any, projectPath: string) => {
   await execUtil(`code ${projectPath}`);
 };
 
+const openProjectBySoft = async (e: any, params: any) => {
+  const execUtil = promisify(exec);
+  const { path, type } = params;
+  await execUtil(`${type} ${path}`);
+};
+
 const openProjectWebStorm = async (e: any, projectPath: string) => {
   const execUtil = promisify(exec);
   await execUtil(`webstorm64 ${projectPath}`);
@@ -99,13 +105,13 @@ const saveProject = async (
 ) => {
   const { path } = project;
   const list = (await Cache.workSpaceCache(e, [
-    workCachePath,
+    workCachePath
   ])) as ProjectType[];
   const newList = list.map((item) => {
     if (item.path == path) {
       return {
         ...project,
-        path,
+        path
       };
     }
     return item;
@@ -121,4 +127,5 @@ export default {
   openProjectVscode,
   saveProject,
   openProjectWebStorm,
+  openProjectBySoft
 };

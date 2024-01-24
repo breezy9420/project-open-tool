@@ -9,6 +9,7 @@ enum ProjectApiEnum {
   openProjectVscode = 'openProjectVscode',
   saveProject = 'saveProject',
   openProjectWebStorm = 'openProjectWebStorm',
+  openProjectBySoft = 'openProjectBySoft'
 }
 
 class ProjectApi extends BaseApi {
@@ -18,7 +19,7 @@ class ProjectApi extends BaseApi {
       workSpaceCache
     );
     return {
-      data: workSpaceList,
+      data: workSpaceList
     };
   }
 
@@ -53,6 +54,10 @@ class ProjectApi extends BaseApi {
 
   async openWebStorm(path: string) {
     await this.ipcRenderer.invoke(ProjectApiEnum.openProjectWebStorm, path);
+  }
+
+  async openSoft(params: any) {
+    await this.ipcRenderer.invoke(ProjectApiEnum.openProjectBySoft, params);
   }
 
   async openDir(path: string) {
