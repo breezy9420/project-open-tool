@@ -12,13 +12,17 @@ const MyTag = (props: Props) => {
   const color = useMemo(() => {
     switch (type) {
       case ProjectTypeEnum.vue:
+      case ProjectTypeEnum.python:
         return '#87d068';
       case ProjectTypeEnum.react:
-        case ProjectTypeEnum.go:
+      case ProjectTypeEnum.go:
+      case ProjectTypeEnum.c:
         return '#2db7f5';
       case ProjectTypeEnum.dir:
-        case ProjectTypeEnum.javascript:
+      case ProjectTypeEnum.javascript:
         return 'orange';
+      case ProjectTypeEnum.c:
+        return 'red';
       default:
         return 'orange';
     }

@@ -23,18 +23,27 @@ const options = [
   { label: 'react', value: 'react' },
   { label: 'go', value: 'go' },
   { label: 'javascript', value: 'javascript' },
+  { label: 'c', value: 'c' },
+  { label: 'python', value: 'python' },
+  { label: 'java', value: 'java' },
   { label: 'dir', value: 'dir' },
 ];
 
 const EditForm = (props: Props) => {
-  const { editVisiable, setEditVisiable, editObj = {}, saveCallBack,workCachePath } = props;
+  const {
+    editVisiable,
+    setEditVisiable,
+    editObj = {},
+    saveCallBack,
+    workCachePath,
+  } = props;
   //   const [options, setOptions] = useState<optionType[]>([]);
   const [form] = Form.useForm<ProjectType>();
 
   const handleSave = async () => {
     const data = await form.validateFields();
     if (data?.path) {
-      await ProjectApi.saveProject(data,workCachePath);
+      await ProjectApi.saveProject(data, workCachePath);
       saveCallBack();
       message.success('读取成功');
     }

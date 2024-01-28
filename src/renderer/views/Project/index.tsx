@@ -138,6 +138,7 @@ const Project = () => {
         if (
           item.name.includes(queryName) ||
           item.zname?.includes(queryName) ||
+          item.type?.includes(queryName) ||
           queryName == ''
         )
           return item;
@@ -212,7 +213,7 @@ const Project = () => {
           style={{ width: 160 }}
         />
         <Input
-          placeholder="输入中英文名称"
+          placeholder="输入中英文名称或类型"
           onChange={(e) => {
             setQueryName(e.target.value);
           }}

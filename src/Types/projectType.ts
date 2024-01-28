@@ -2,8 +2,11 @@ export enum ProjectTypeEnum {
   vue = 'vue',
   react = 'react',
   dir = 'dir',
-  javascript = "javascript",
-  go = "go"
+  javascript = 'javascript',
+  go = 'go',
+  python = 'python',
+  java = 'java',
+  c = 'c',
 }
 
 export interface ProjectType {
