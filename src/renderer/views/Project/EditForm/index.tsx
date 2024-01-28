@@ -19,11 +19,9 @@ const layout = {
 };
 
 const options = [
-  { label: 'vue', value: 'vue' },
-  { label: 'react', value: 'react' },
   { label: 'go', value: 'go' },
-  { label: 'javascript', value: 'javascript' },
-  { label: 'c', value: 'c' },
+  { label: 'js', value: 'js' },
+  { label: 'c', value: 'C' },
   { label: 'python', value: 'python' },
   { label: 'java', value: 'java' },
   { label: 'dir', value: 'dir' },
