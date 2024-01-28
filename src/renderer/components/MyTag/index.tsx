@@ -16,7 +16,7 @@ const MyTag = (props: Props) => {
       case ProjectTypeEnum.go:
       case ProjectTypeEnum.c:
         return '#2db7f5';
-      case ProjectTypeEnum.dir:xiuf
+      case ProjectTypeEnum.dir:
       case ProjectTypeEnum.js:
         return 'orange';
       case ProjectTypeEnum.c:
