@@ -2,15 +2,17 @@ import PageComp from '@r/components/PageComp';
 import { ProList } from '@ant-design/pro-components';
 import {
   Button,
-  Col, Dropdown,
+  Col,
+  Dropdown,
   Form,
-  Input, MenuProps,
+  Input,
+  MenuProps,
   message,
   Row,
   Select,
   Space,
   Tag,
-  Tooltip
+  Tooltip,
 } from 'antd';
 import MyTag from '@/renderer/components/MyTag';
 import ProjectApi from '@/service/projectApi';
@@ -26,7 +28,6 @@ type OptionType = {
   value: string;
 };
 
-
 const Project = () => {
   const [visiable, setVisiable] = useState(false);
   const [editVisiable, setEditVisiable] = useState(false);
@@ -40,7 +41,7 @@ const Project = () => {
     const { data = [] } = await workSpaceApi.getList();
     const arr = data.map((item) => ({
       label: item.name,
-      value: item.workCachePath
+      value: item.workCachePath,
     }));
     setOptions(arr);
   };
@@ -98,26 +99,25 @@ const Project = () => {
   const items: MenuProps['items'] = [
     {
       label: 'vscode',
-      key: 'code'
+      key: 'code',
     },
     {
       label: 'webstorm64',
-      key: 'webstorm64'
+      key: 'webstorm64',
     },
     {
       label: 'pycharm64',
-      key: 'pycharm64'
+      key: 'pycharm64',
     },
     {
       label: 'goland64',
-      key: 'goland64'
+      key: 'goland64',
     },
     {
       label: 'IDEA64',
-      key: 'idea64'
-    }
+      key: 'idea64',
+    },
   ];
-
 
   const open = async (e: any, path: string) => {
     const { key } = e;
@@ -125,7 +125,7 @@ const Project = () => {
     try {
       await ProjectApi.openSoft({
         type: key,
-        path
+        path,
       });
     } catch (error) {
       message.error(error + '');
@@ -164,14 +164,9 @@ const Project = () => {
           >
             编辑配置
           </a>,
-          <div style={{ width: 120 }}>
-            <Dropdown menu={{ items, onClick: (e) => open(e, item.path) }}>
-              <a onClick={e => e.preventDefault()}>
-                打开方式
-              </a>
-            </Dropdown>
-          </div>
-
+          <Dropdown menu={{ items, onClick: (e) => open(e, item.path) }}>
+            <a onClick={(e) => e.preventDefault()}>打开方式</a>
+          </Dropdown>,
         ],
         content: (
           <Row gutter={[0, 6]}>
@@ -186,7 +181,7 @@ const Project = () => {
               </Tooltip>
             </Col>
           </Row>
-        )
+        ),
       }));
   }, [queryName, dataSource]);
 
@@ -232,7 +227,7 @@ const Project = () => {
           </Button>,
           <Button key="create" type="primary" onClick={handleAdd}>
             读取工作区
-          </Button>
+          </Button>,
         ]}
         grid={{ gutter: 16, column: 3 }}
         metas={{
@@ -240,8 +235,8 @@ const Project = () => {
           subTitle: {},
           content: {},
           actions: {
-            cardActionProps: 'actions'
-          }
+            cardActionProps: 'actions',
+          },
         }}
       ></ProList>
 
