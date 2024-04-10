@@ -135,10 +135,21 @@ const Project = () => {
   const list = useMemo(() => {
     return dataSource
       .filter((item) => {
+        const { name, zname = '', type = '' } = item;
+        const regExp = new RegExp(`.*${queryName}.*`, 'img');
+        console.log(regExp);
+
+        // if (
+        //   item.name.includes(queryName) ||
+        //   item.zname?.includes(queryName) ||
+        //   item.type?.includes(queryName) ||
+        //   queryName == ''
+        // )
+        //   return item;
         if (
-          item.name.includes(queryName) ||
-          item.zname?.includes(queryName) ||
-          item.type?.includes(queryName) ||
+          regExp.test(name) ||
+          regExp.test(zname) ||
+          regExp.test(type) ||
           queryName == ''
         )
           return item;
